@@ -1,4 +1,3 @@
-// index.js
 const logplease = require('logplease');
 const logger = logplease.create('Ejercicio-2');
 
