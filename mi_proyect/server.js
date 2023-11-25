@@ -9,13 +9,15 @@ const server = http.createServer((req, res) => {
         filePath = './html/home.html';
     }
 
-    fs.readFile(filePath, 'utf8', (err, content) => {
-        if (err) {
-            res.writeHead(404);
-            res.end('Not Found');
-        } else {
+     fs.readFile(filePath, 'utf8', (err, data) => {
+        try {
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(content);
+            res.write(data);
+            return res.end();
+        } catch (error) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            res.write('<h1>404 Not Found</h1><p>La página solicitada no existe.</p>');
+            return res.end();
         }
     });
 });
